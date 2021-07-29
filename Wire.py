@@ -8,9 +8,8 @@ load_dotenv()
 API_KEY = os.getenv("API_KEY")
 API_URL = os.getenv("API_URL")
 
-
+os.system('clear||cls')
 BANNER = '''[magenta]
-
           _)          
 \ \  \   / |  __| _ \ 
  \ \  \ /  | |    __/ 
