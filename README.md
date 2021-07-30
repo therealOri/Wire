@@ -18,6 +18,7 @@ git clone https://github.com/therealOri/Wire.git
 cd Wire
 pip3 install requirements.txt
 ```
+API_KEY can be found and made here: [Numverify](https://numverify.com/)
 #
 Python3 Downloads:
 
