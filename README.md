@@ -1,5 +1,13 @@
 # Wire
 A very simple OSINT phone number lookup tool written in python3!
+#
+Google's phone number for example.
+
+![Wire](https://user-images.githubusercontent.com/45724082/127580935-d97b1050-39fa-4487-a58e-398a72b21210.png)
+__ __
+![Wire_google](https://user-images.githubusercontent.com/45724082/127580968-1c60ac27-578f-4010-a71e-1d57c5d1274c.png)
+
+
 
 
 
