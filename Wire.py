@@ -25,19 +25,16 @@ console = Console()
 console.print(BANNER)
 
 
-args = input('What phone number would you like to look up?: ')
+arg = input('What phone number would you like to look up?: ')
 os.system('clear||cls')
 
-if len(args) == 1:
-	console.print(f'{args[0]}')
-	sys.exit(-1)
 
 console.print(BANNER)
-numbers = [args[1:]]
+number = [arg[1:]]
 
-for number in numbers:
-	console.rule(f'Results for number: \'{number}\'')
-	r = requests.get(API_URL.format(API_KEY, number))
+for arg in number:
+	console.rule(f'Results for number: \'{arg}\'')
+	r = requests.get(API_URL.format(API_KEY, arg))
 	
 	if 'You do not have a valid API Key' in r.text:
 		console.print('[red][-][/red] Your API Key is invalid')
