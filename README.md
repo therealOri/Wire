@@ -22,5 +22,5 @@ API_KEY can be found and made here: [Numverify](https://numverify.com/)
 #
 Python3 Downloads:
 
-[Python3 - Linux/Other](https://www.python.org/downloads/release/python-396/) | [Python3 - Windows](https://www.python.org/ftp/python/3.9.6/python-3.9.6-amd64.exe)
+[Python3 - Linux/Other](https://www.python.org/downloads/release/python-3111/) | [Python3 - Windows](https://www.python.org/ftp/python/3.11.1/python-3.11.1-amd64.exe)
 __ __
