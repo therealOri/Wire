@@ -1,60 +1,69 @@
-import requests
-import sys
-from rich.console import Console
 import os
+import requests
+from rich.console import Console
+from rich.rule import Rule
+import beaupy
+import json
 from dotenv import load_dotenv
 load_dotenv()
 
-API_KEY = os.getenv("API_KEY")
-API_URL = os.getenv("API_URL")
 
-os.system('clear||cls')
+
+
 BANNER = '''[magenta]
-          _)          
-\ \  \   / |  __| _ \ 
- \ \  \ /  | |    __/ 
-  \_/\_/  _|_|  \___| 
+██╗    ██╗██╗██████╗ ███████╗
+██║    ██║██║██╔══██╗██╔════╝
+██║ █╗ ██║██║██████╔╝█████╗
+██║███╗██║██║██╔══██╗██╔══╝
+╚███╔███╔╝██║██║  ██║███████╗
+╚══╝╚══╝ ╚═╝╚═╝  ╚═╝╚══════╝
 
-  
-[green]by https://github.com/therealOri[/green]
+
+by [green]https://github.com/therealOri[/green]
 
 [/magenta]
 '''
 
-console = Console()
-console.print(BANNER)
 
 
-arg = input('What phone number would you like to look up?: ')
-os.system('clear||cls')
+def clear():
+	os.system("clear||cls")
 
 
-console.print(BANNER)
-number = [arg[1:]]
 
-for arg in number:
-	console.rule(f'Results for number: \'{arg}\'')
-	r = requests.get(API_URL.format(API_KEY, arg))
-	
-	if 'You do not have a valid API Key' in r.text:
-		console.print('[red][-][/red] Your API Key is invalid')
-		sys.exit()
+def main():
+	console = Console()
+	console.print(BANNER)
 
-	json_data = r.json()
-	if json_data['valid'] == True:
-		for key, value in json_data.items():
-			if value:
-				key = key.replace('_', ' ')
+	API_KEY = os.getenv("API_KEY")
+	if not API_KEY:
+		API_KEY = beaupy.prompt("Abstractapi Key - ( https://abstractapi.com ): ", secure=True)
+		if not API_KEY:
+			clear()
+			quit()
 
-				if ' ' in key:
-					x = key.split(' ')
-					out = ''
-					for y in x:
-						out += y[0].upper() + y[1:] + ' '
-					key = out
-				else:
-					key = key[0].upper() + key[1:]
+	PHONE_NUMBER = beaupy.prompt("11 digit phone number - (14152007986): ")
+	if not PHONE_NUMBER:
+		clear()
+		quit()
 
-				console.print(f'[green][+][/green] {key}: {value}')
+	url = f"https://phonevalidation.abstractapi.com/v1/?api_key={API_KEY}&phone={PHONE_NUMBER}"
+	clear()
+
+	response = requests.get(url)
+	if response.status_code == 200:
+		data = response.json()
+		console.rule(f"Results for number: '{PHONE_NUMBER}'\n")
+		for key, value in data.items():
+			key = key.replace("_", " ").title()
+			console.print(f"[green][+][/green] {key}: {value}")
 	else:
-		console.print('[red][-][/red] Invalid Phone Number.')
+		clear()
+		console.input(f'Unable to make request. Error code: [red]{response.status_code}[/red]\n\nPress "enter" to exit...')
+		clear()
+		quit()
+
+
+if __name__ == '__main__':
+	clear()
+	main()
