@@ -48,8 +48,6 @@ def main():
 		quit()
 
 	url = f"https://phonevalidation.abstractapi.com/v1/?api_key={API_KEY}&phone={PHONE_NUMBER}"
-	clear()
-
 	response = requests.get(url)
 	if response.status_code == 200:
 		data = response.json()
